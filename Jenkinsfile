@@ -18,10 +18,10 @@ node {
       imageTag= readFile('.git/commit-id').trim()
 }
 		  
-	stage('RUN Unit Tests'){
+	/*stage('RUN Unit Tests'){
       sh "npm install"
       sh "npm test"
-	}
+	}*/
 
    
         stage('Build image') {
@@ -62,4 +62,3 @@ node {
 }
 }
 }
-

@@ -2,7 +2,6 @@ node {
 		def Namespace = "default"
 		def ImageName = "sayarapp/sayarapp"
         def app
-		def imageTag
 		
     withCredentials([
       [$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS'],
@@ -55,8 +54,7 @@ node {
 	
     stage('Deploy on K8s'){
 
-     sh "ansible-playbook /var/lib/jenkins/ansible/deploy.yml  --user=jenkins --extra-vars ImageName=${ImageName} --extra-vars imageTag=${imageTag} --ex
-tra-vars Namespace=${Namespace}"
+     sh "ansible-playbook /var/lib/jenkins/ansible/deploy.yml  --user=jenkins --extra-vars ImageName=${ImageName} --extra-vars imageTag=${imageTag} --extra-vars Namespace=${Namespace}"
     }
      } catch (err) {
       currentBuild.result = 'FAILURE'

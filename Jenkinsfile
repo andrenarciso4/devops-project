@@ -11,11 +11,12 @@ node {
             sh """
                 docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
             """
-        }
-        stage('Preparation') {
-          git 'https://github.com/andrenarciso4/jenkins-project.git'
-		  
-		       }
+  try{
+  stage('Checkout'){
+      git 'https://github.com/andrenarciso4/devops-project.git'
+      sh "git rev-parse --short HEAD > .git/commit-id"
+      imageTag= readFile('.git/commit-id').trim()
+}
 		  
 	stage('RUN Unit Tests'){
       sh "npm install"
@@ -59,4 +60,6 @@ tra-vars Namespace=${Namespace}"
      } catch (err) {
       currentBuild.result = 'FAILURE'
     }
+}
+}
 }

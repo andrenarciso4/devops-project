@@ -2,6 +2,7 @@ node {
 		def Namespace = "default"
 		def ImageName = "sayarapp/sayarapp"
         def app
+		def imageTag
 		
     withCredentials([
       [$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS'],
@@ -63,3 +64,4 @@ tra-vars Namespace=${Namespace}"
 }
 }
 }
+
